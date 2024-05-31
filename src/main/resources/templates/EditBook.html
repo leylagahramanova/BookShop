@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Edit Book</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand text-white" href="/">Book Store</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="available_books">Available Books</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="my_books">My Books</a>
+                </li>
+            </ul>
+        </div>
+        <a class="nav-link text-white" href="create">New Book Register</a>
+    </div>
+</nav>
+<div class="container my-5">
+    <h4>Edit Book</h4>
+    <form enctype="multipart/form-data" method="post" th:object="${bookDto}" >
+        <div class="mb-3">
+            <label class="form-label">Book Name</label>
+            <input type="text" class="form-control" th:field="${bookDto.name}" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Author</label>
+            <input type="text" class="form-control" th:field="${bookDto.author}" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Description</label>
+            <input type="text" class="form-control" th:field="${bookDto.description}" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Price</label>
+            <input type="number" class="form-control" step="0.01" min="0" th:field="${bookDto.price}" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Book Cover Image</label>
+            <img th:src="@{'/images/' + ${book.imageFileName}}" alt="Book Image" width="150"/>
+            <input type="file" class="form-control" th:field="${bookDto.imageFile}">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Select Genre</label>
+            <select class="form-select" th:field="${bookDto.category}">
+                <option value="Other">Select a genre</option>
+                <option value="Tragedy">Tragedy</option>
+                <option value="Comedy">Comedy</option>
+                <option value="Fantasy">Fantasy</option>
+                <option value="Mystery">Mystery</option>
+                <option value="Biography">Biography</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
