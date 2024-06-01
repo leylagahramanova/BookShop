@@ -42,16 +42,17 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
                         <li class="nav-item">
                             <a class="nav-link text-white" href="available_books">Available Books</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-white" href="my_books">My Books</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="create">New Book Register</a>
+                        </li>
                     </ul>
                 </div>
-                <a class="nav-link text-white" href="create">New Book Register</a>
             </div>
         </nav>
         <div class="container my-5">
@@ -72,7 +73,7 @@
                     <tbody>
                     <tr th:each="book, index : ${books}">
                         <td th:text="${index.count}"></td>
-                        <td><img th:src="@{'/images/' + ${book.imageFileName}}"  width="150" height="150"/></td>
+                        <td><img th:src="@{'/images/' + ${book.imageFileName}}" alt="..." width="150" height="150"/></td>
                         <td th:text="${book.name}"></td>
                         <td th:text="${book.author}"></td>
                         <td th:text="${#strings.length(book.description) > 50 ? #strings.substring(book.description, 0, 50) + '...' : book.description}"></td>
