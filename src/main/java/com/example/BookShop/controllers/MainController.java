@@ -1,8 +1,6 @@
 package com.example.BookShop.controllers;
 
-import com.example.BookShop.models.Book;
-import com.example.BookShop.models.BookDto;
-import com.example.BookShop.models.MyBookList;
+import com.example.BookShop.models.*;
 import com.example.BookShop.services.BooksRepository;
 import com.example.BookShop.services.DetailsRepository;
 import com.example.BookShop.services.MyBooksRepository;
@@ -48,10 +46,20 @@ public class MainController {
     }
 
     @GetMapping("/available_books")
-    public String showList(Model model) {
-        List<Book> list = repo.findAll(Sort.by(Sort.Direction.DESC, "id"));
+    public String showList(Model model,
+                           @RequestParam(required = false) String name,
+                           @RequestParam(required = false) String author,
+                           @RequestParam(required = false) String category) {
+        List<Book> list;
+        if ((name != null && !name.isEmpty()) ||
+                (author != null && !author.isEmpty()) ||
+                (category != null && !category.isEmpty())) {
+            list = repo.findByFilters(name, author, category);
+        } else {
+            list = repo.findAll(Sort.by(Sort.Direction.DESC, "id"));
+        }
         model.addAttribute("books", list);
-        return "List";
+        return "List"; // Ensure this is the correct template name
     }
     @GetMapping("/available_books/admin")
     public String showBookList(Model model) {
@@ -218,17 +226,28 @@ public class MainController {
         }
         return "redirect:/my_books";
     }
-
     @GetMapping("/checkout")
     public String showCheckoutPage(@RequestParam("id") int id, Model model) {
         try {
+            logger.info("Received id: " + id);
             Book book = repo.findById(id).orElseThrow();
             model.addAttribute("book", book);
-            return "checkout";
+            model.addAttribute("checkoutDto", new CheckoutDto());
         } catch (Exception ex) {
             System.out.println("Exception: " + ex.getMessage());
-            return "redirect:/my_books";
+            return "redirect:/available_books";
         }
+        return "checkout";
+    }
+
+    @PostMapping("/checkout")
+    public String handleCheckout(@ModelAttribute @Valid Checkout checkoutDto, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            return "checkout";
+        }
+        // Handle the checkout logic here
+        // Save order details, process payment, etc.
+        return "checkoutSuccess"; // Redirect to a success page or show a success message
     }
     @GetMapping("/book/{id}")
     public String showBookDetail(Model model, @PathVariable("id") int id) {
