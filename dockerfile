@@ -2,5 +2,5 @@
 FROM openjdk:11
 WORKDIR /src/java
 COPY . /src/java
-RUN javac MainController.java
-CMD ["java", "MainController"]
+RUN javac BookShopApplication.java
+CMD ["java", "BookShopApplication"]
