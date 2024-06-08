@@ -1,4 +1,4 @@
-FROM openjdk:11
-WORKDIR /src/java
-COPY . /src/java
+FROM openjdk:21
+WORKDIR /src/main/java
+COPY . /src/main/java
 CMD java MainController.java
