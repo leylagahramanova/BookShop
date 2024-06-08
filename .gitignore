@@ -1,9 +1,15 @@
+# Ignore the HELP.md file
 HELP.md
+
+# Ignore the target directory
 target/
-!.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+# Ignore the node_modules directory
+node_modules/
+
+# Ignore Spring Tool Suite (STS) specific files
 ### STS ###
 .apt_generated
 .classpath
@@ -13,12 +19,14 @@ target/
 .springBeans
 .sts4-cache
 
+# Ignore IntelliJ IDEA specific files
 ### IntelliJ IDEA ###
-.idea
+.idea/
 *.iws
 *.iml
 *.ipr
 
+# Ignore NetBeans specific files
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
@@ -29,5 +37,6 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
+# Ignore Visual Studio Code specific files
 ### VS Code ###
 .vscode/
