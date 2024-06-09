@@ -58,24 +58,27 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<mainClass>com.example.BookShop.BookShopApplication</mainClass>
+				</configuration>
 			</plugin>
 		</plugins>
-			<resources>
-				<resource>
-					<directory>src/main/resources</directory>
-					<includes>
-						<include>**/*.properties</include>
-						<include>**/*.xml</include>
-						<include>**/*.yml</include>
-						<include>**/*.html</include>
-						<include>**/*.css</include>
-						<include>**/*.js</include>
-						<include>**/*.png</include>
-						<include>**/*.jpg</include>
-						<include>**/*.webp</include>
-					</includes>
-				</resource>
-			</resources>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>**/*.properties</include>
+					<include>**/*.xml</include>
+					<include>**/*.yml</include>
+					<include>**/*.html</include>
+					<include>**/*.css</include>
+					<include>**/*.js</include>
+					<include>**/*.png</include>
+					<include>**/*.jpg</include>
+					<include>**/*.webp</include>
+				</includes>
+			</resource>
+		</resources>
 	</build>
 
 </project>

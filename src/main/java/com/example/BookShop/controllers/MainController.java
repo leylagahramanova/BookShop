@@ -22,7 +22,6 @@ import java.nio.file.*;
 import java.util.List;
 import java.util.logging.Logger;
 
-@SpringBootApplication
 @Controller
 public class MainController {
 
