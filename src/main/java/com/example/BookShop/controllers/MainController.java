@@ -43,38 +43,41 @@ public class MainController {
         model.addAttribute("title", "Main Page");
         return "home";
     }
+    @GetMapping("/admin")
+    public String homeadmin(Model model) {
+        model.addAttribute("title", "Main Page");
+        return "home-admin";
+    }
 
     @GetMapping("/available_books")
     public String showList(Model model,
-                           @RequestParam(required = false) String name,
-                           @RequestParam(required = false) String author,
-                           @RequestParam(required = false) String category) {
+                           @RequestParam(required = false) String category
+                          ) {
         List<Book> list;
-        if ((name != null && !name.isEmpty()) ||
-                (author != null && !author.isEmpty()) ||
+        if (
                 (category != null && !category.isEmpty())) {
-            list = repo.findByFilters(name, author, category);
+            list = repo.findByFilters( category);
         } else {
             list = repo.findAll(Sort.by(Sort.Direction.DESC, "id"));
         }
         model.addAttribute("books", list);
         return "List"; // Ensure this is the correct template name
     }
-    @GetMapping("/available_books/admin")
+    @GetMapping("/admin/available_books")
     public String showBookList(Model model) {
         List<Book> list = repo.findAll(Sort.by(Sort.Direction.DESC, "id"));
         model.addAttribute("books", list);
         return "bookList";
     }
 
-    @GetMapping("/create")
+    @GetMapping("/admin/create")
     public String bookRegister(Model model) {
         BookDto bookDto = new BookDto();
         model.addAttribute("bookDto", bookDto);
         return "bookRegister";
     }
 
-    @PostMapping("/create")
+    @PostMapping("/admin/create")
     public String createBook(@ModelAttribute @Valid BookDto bookDto, BindingResult result) {
         if (bookDto.getImageFile().isEmpty()) {
             result.addError(new FieldError("bookDto", "imageFile", "The image is required"));
@@ -116,7 +119,7 @@ public class MainController {
         return "redirect:/available_books";
     }
 
-    @GetMapping("/available_books/admin/edit")
+    @GetMapping("/admin/available_books/edit")
     public String showEditPage(Model model, @RequestParam int id) {
         try {
             Book book = repo.findById(id).orElseThrow();
@@ -135,7 +138,7 @@ public class MainController {
         return "EditBook";
     }
 
-    @PostMapping("/available_books/admin/edit")
+    @PostMapping("/admin/available_books/edit")
     public String updateBook(Model model, @RequestParam int id, @Valid @ModelAttribute BookDto bookDto, BindingResult result) {
         if (result.hasErrors()) {
             return "EditBook";
@@ -179,7 +182,7 @@ public class MainController {
         return "redirect:/available_books";
     }
 
-    @GetMapping("/available_books/admin/delete")
+    @GetMapping("/admin/available_books/delete")
     public String deleteBook(@RequestParam int id) {
         try {
             Book book = repo.findById(id).get();
