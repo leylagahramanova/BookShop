@@ -9,7 +9,7 @@
         .btn {
             display: flex;
             flex-direction: row;
-            justify-content: flex-start;
+           justify-content: center;
             align-items: center;
             padding: 0;
             flex-wrap: wrap;
@@ -39,6 +39,39 @@
             display: inline-block;
             margin: 4px 2px;
             cursor: pointer;}
+                    .cCarousel-item {
+  width: 300px;
+  height: auto;
+  border: 2px solid grey;
+  border-radius: 15px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.cCarousel-item img {
+  width: 100%;
+  object-fit: cover;
+  min-height: 300px;
+  color: white;
+}
+
+.cCarousel-item .infos {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  background: white;
+  color: black;
+  padding:10px;
+}
+.cards{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+} article{
+margin:1rem;}
     </style>
 </head>
 
@@ -54,27 +87,21 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="available_books">Available Books</a>
+                            <a class="nav-link text-white" href="/available_books">Available Books</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="my_books">My Books</a>
+                            <a class="nav-link text-white" href="/my_books">My Books</a>
                         </li>
 
                     </ul>
-                    <a class="nav-link text-white" href="create">New Book Register</a>
                 </div>
             </div>
         </nav>
 
         <div class="container my-5">
+
             <form method="get" action="/available_books">
                 <div class="row">
-                    <div class="col-md-3 t">
-                        <input type="text" class="form-control" name="name" placeholder="Name" />
-                    </div>
-                    <div class="col-md-3 t" >
-                        <input type="text" class="form-control" name="author" placeholder="Author" />
-                    </div>
                     <div class="col-md-3 t">
                         <select class="form-control" id="categorySelect" name="category">
                             <option value="">Select Category</option>
@@ -91,41 +118,22 @@
                 </div>
 
             </form>
-
-            <div class="table-responsive" style="overflow-x:auto;">
-                <table class="table table-success table-striped table-hover">
-                    <thead>
-                    <tr>
-                        <th scope="col">№</th>
-                        <th scope="col">Image</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Author</th>
-                        <th scope="col">Description</th>
-                        <th scope="col">Category</th>
-                        <th scope="col">Price</th>
-                        <th scope="col">Action</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="book, index : ${books}">
-                        <td th:text="${index.count}"></td>
-                        <td><img th:src="@{'/images/' + ${book.imageFileName}}" alt="..." width="150" height="150"/></td>
-                        <td th:text="${book.name}"></td>
-                        <td th:text="${book.author}"></td>
-                        <td th:text="${#strings.length(book.description) > 80 ? #strings.substring(book.description, 0, 80) + '...' : book.description}"></td>
-                        <td th:text="${book.category}"></td>
-                        <td th:text="${book.price} + '$'"></td>
-                        <td>
+            <div class="cards">
+                <article class="cCarousel-item "th:each="book, index : ${books}">
+                    <img th:src="@{'/images/' + ${book.imageFileName}}" alt="..." width="200" height="200"/>
+                    <div class="infos">
+                        <h5><span th:text="${book.name}"></span></h5>
+                        <b><span th:text="${book.author}"></span></b>
+                        <p class="text-muted">Category: <span th:text="${book.category}"></span></p>
+                        <p class="text-muted">Price: <span th:text="${book.price} + '$'"></span></p>
+                        <div class="btn">
+                            <a class="btn btn-primary btn-sm" th:href="@{/book/{id}(id=${book.id})}">View Details</a>
                             <div class="btn">
-                                <a class="btn btn-primary btn-sm" th:href="@{/book/{id}(id=${book.id})}">View Details</a>
-                                <div class="btn">
-                                    <a class="btn btn-success btn-sm" th:href="@{/myList/{id}(id=${book.id})}">Add To MyBook</a>
-                                </div>
+                                <a class="btn btn-success btn-sm" th:href="@{/myList/{id}(id=${book.id})}">Add To MyBook</a>
                             </div>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+                        </div>
+                    </div>
+                </article>
             </div>
         </div>
     </div>
@@ -133,18 +141,13 @@
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         const searchButton = document.getElementById("searchButton");
+    window.location.href = "/available_books?" +
 
         if (searchButton) {
             searchButton.addEventListener("click", function() {
-                const searchInput = document.getElementById("searchInput");
-                const searchText = searchInput.value.trim().toLowerCase();
                 const categorySelect = document.getElementById("categorySelect");
                 const selectedCategory = categorySelect.value.trim().toLowerCase();
-
-                window.location.href = "/available_books?" +
-                    "name=" + encodeURIComponent(searchText) + "&" +
-                    "author=" + encodeURIComponent(searchText) + "&" +
-                    "category=" + encodeURIComponent(selectedCategory);
+                    "author=" + encodeURIComponent(searchText) ;
             });
         }
     });

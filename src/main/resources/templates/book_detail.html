@@ -226,7 +226,7 @@ body {
                             <article class="cCarousel-item" th:each="relatedBook : ${relatedBooks}">
                                 <img th:src="@{'/images/' + ${relatedBook.imageFileName}}" alt="..." width="150" height="200" class="card-img-top"/>
                                 <div class="infos">
-                                     <a class="btn btn-primary btn-sm" th:href="@{/book/{id}(id=${relatedBook.id})}">View Details</a>
+                                    <a class="btn btn-primary btn-sm" th:href="@{/book/{id}(id=${relatedBook.id})}">View Details</a>
                                 </div>
                             </article>
                         </div>

@@ -27,6 +27,40 @@
         td {
             padding: 0;
         }
+
+                           .cCarousel-item {
+  width: 300px;
+  height: auto;
+  border: 2px solid grey;
+  border-radius: 15px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.cCarousel-item img {
+  width: 100%;
+  object-fit: cover;
+  min-height: 300px;
+  color: white;
+}
+
+.cCarousel-item .infos {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  background: white;
+  color: black;
+  padding:10px;
+}
+.cards{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+} article{
+margin:1rem;}
     </style>
 </head>
 <body>
@@ -40,18 +74,36 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="available_books">Available Books</a>
+                    <a class="nav-link text-white" href="/available_books">Available Books</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="my_books">My Books</a>
+                    <a class="nav-link text-white" href="/my_books">My Books</a>
                 </li>
             </ul>
         </div>
-        <a class="nav-link text-white" href="create">New Book Register</a>
     </div>
 </nav>
 <main class="container my-5">
     <h2>My Books</h2>
+
+    <!--    <div class="cards">-->
+    <!--        <article class="cCarousel-item "th:each="book, iterStat : ${myBooks}">-->
+    <!--            <img th:src="@{'/images/' + ${book.imageFileName}}" alt="..." width="200" height="200"/>-->
+    <!--            <div class="infos">-->
+    <!--                <h5><span th:text="${book.name}"></span></h5>-->
+    <!--                <b><span th:text="${book.author}"></span></b>-->
+    <!--                <p class="text-muted">Category: <span th:text="${book.category}"></span></p>-->
+    <!--                <p class="text-muted">Price: <span th:text="${book.price} + '$'"></span></p>-->
+    <!--                <div class="btn">-->
+    <!--                    <a class="btn btn-primary btn-sm" th:href="@{/book/{id}(id=${book.id})}">View Details</a>-->
+    <!--                    <a class="btn btn-danger btn-sm" th:href="@{/my_books/delete(id=${book.id})}" onclick="return confirm('Are you sure?')">Delete</a>-->
+    <!--                </div>-->
+    <!--                <div class="btn">-->
+    <!--                    <a class="btn btn-success" th:href="@{/checkout(id=${book.id})}">Buy book</a>-->
+    <!--                </div>-->
+    <!--            </div>-->
+    <!--        </article>-->
+    <!--    </div>-->
     <div class="table-responsive" style="overflow-x:auto;">
         <table class="table table-success table-striped table-hover">
             <thead>
@@ -78,7 +130,7 @@
                     </div>
                     <div class="btn">
                         <a class="btn btn-success" th:href="@{/checkout(id=${book.id})}">Buy book</a>
-                  </div>
+                    </div>
                 </td>
             </tr>
             </tbody>
