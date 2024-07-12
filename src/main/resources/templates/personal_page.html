@@ -1,67 +1,11 @@
 <!DOCTYPE HTML>
 <html xmlns:th="https://www.thymeleaf.org">
 <head>
-    <title th:text="${title}">My Books</title>
+    <title th:text="${title}">Personal Page</title>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
-    <style>
-        .btn {
-            display: flex;
-            flex-direction: row;
-            justify-content: flex-start;
-            align-items: center;
-            padding: 0;
-        }
-        .btn a {
-            font-size: 12px;
-            border: none;
-            color: white;
-            padding: 8px 20px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            margin: 4px 2px;
-            cursor: pointer;
-        }
-        td {
-            padding: 0;
-        }
-
-                           .cCarousel-item {
-  width: 300px;
-  height: auto;
-  border: 2px solid grey;
-  border-radius: 15px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-}
-
-.cCarousel-item img {
-  width: 100%;
-  object-fit: cover;
-  min-height: 300px;
-  color: white;
-}
-
-.cCarousel-item .infos {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-  background: white;
-  color: black;
-  padding:10px;
-}
-.cards{
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-} article{
-margin:1rem;}
-    </style>
+    <link rel="stylesheet" href="static/style.css">
 </head>
 <body>
 <main class="container my-5">

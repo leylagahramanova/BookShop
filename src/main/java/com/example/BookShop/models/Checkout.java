@@ -1,13 +1,21 @@
 package com.example.BookShop.models;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-
+import jakarta.persistence.*;
+@Entity
 public class Checkout{
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String fname;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "book_id")
+    private Book book;
+
+    private String name;
     private String email;
     private String address;
     private String city;
@@ -18,17 +26,16 @@ public class Checkout{
     private String expmonth;
     private String expyear;
     private String cvv;
-
     public Checkout() {
     }
     public int getId() {return id;}
     public void setId(int id) {this.id = id;}
-    public String getFname() {
-        return fname;
+    public String getName() {
+        return name;
     }
 
-    public void setFname(String fname) {
-        this.fname = fname;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {

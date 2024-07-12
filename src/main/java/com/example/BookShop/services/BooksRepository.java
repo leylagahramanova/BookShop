@@ -11,8 +11,4 @@ public interface BooksRepository extends JpaRepository<Book, Integer> {
 
     List<Book> findByCategory(String category);
 
-    @Query("SELECT book FROM Book book WHERE " +
-            "(:category IS NULL OR book.category = :category) " )
-
-    List<Book> findByFilters( @Param("category") String category);
 }

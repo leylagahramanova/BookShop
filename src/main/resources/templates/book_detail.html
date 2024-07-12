@@ -204,14 +204,17 @@ body {
                     <p class="text-muted">Category: <span th:text="${book.category}"></span></p>
                     <p class="text-muted">Price: <span th:text="${book.price} + '$'"></span></p>
                 </div>
+                <div class="btn">
+                    <a class="btn btn-success btn-sm" th:href="@{/checkout(id=${book.id})}">Buy book</a>
+                    <a class="btn btn-success btn-sm" th:href="@{/myList/{id}(id=${book.id})}">Add To MyBook</a>
+                    <a class="btn btn-primary btn-sm" href="/available_books">Back to Book List</a>
+                    <a class="btn btn-success btn-sm" href="https://www.wsfcs.k12.nc.us/cms/lib/NC01001395/Centricity/Domain/7935/Gatsby_PDF_FullText.pdf">Read "The Great Gatsby" for Free</a>
+                </div>
             </div>
             <div class="text">
                 <p th:text="${book.description}"></p>
             </div>
-            <div class="btn">
-                <a class="btn btn-primary btn-sm" href="/available_books">Back to Book List</a>
-                <a class="btn btn-success btn-sm" href="https://www.wsfcs.k12.nc.us/cms/lib/NC01001395/Centricity/Domain/7935/Gatsby_PDF_FullText.pdf">Read "The Great Gatsby" for Free</a>
-            </div>
+
         </div>
         <div class="container cont my-5">
 
@@ -227,7 +230,8 @@ body {
                                 <img th:src="@{'/images/' + ${relatedBook.imageFileName}}" alt="..." width="150" height="200" class="card-img-top"/>
                                 <div class="infos">
                                     <a class="btn btn-primary btn-sm" th:href="@{/book/{id}(id=${relatedBook.id})}">View Details</a>
-                                </div>
+
+                               </div>
                             </article>
                         </div>
                     </div>

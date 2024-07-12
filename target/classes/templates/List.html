@@ -119,21 +119,21 @@ margin:1rem;}
 
             </form>
             <div class="cards">
-            <article class="cCarousel-item "th:each="book, index : ${books}">
-                <img th:src="@{'/images/' + ${book.imageFileName}}" alt="..." width="200" height="200"/>
-                <div class="infos">
-                    <h5><span th:text="${book.name}"></span></h5>
-                    <b><span th:text="${book.author}"></span></b>
-                    <p class="text-muted">Category: <span th:text="${book.category}"></span></p>
-                    <p class="text-muted">Price: <span th:text="${book.price} + '$'"></span></p>
-                    <div class="btn">
-                        <a class="btn btn-primary btn-sm" th:href="@{/book/{id}(id=${book.id})}">View Details</a>
+                <article class="cCarousel-item "th:each="book, index : ${books}">
+                    <img th:src="@{'/images/' + ${book.imageFileName}}" alt="..." width="200" height="200"/>
+                    <div class="infos">
+                        <h5><span th:text="${book.name}"></span></h5>
+                        <b><span th:text="${book.author}"></span></b>
+                        <p class="text-muted">Category: <span th:text="${book.category}"></span></p>
+                        <p class="text-muted">Price: <span th:text="${book.price} + '$'"></span></p>
                         <div class="btn">
-                            <a class="btn btn-success btn-sm" th:href="@{/myList/{id}(id=${book.id})}">Add To MyBook</a>
+                            <a class="btn btn-primary btn-sm" th:href="@{/book/{id}(id=${book.id})}">View Details</a>
+                            <div class="btn">
+                                <a class="btn btn-success btn-sm" th:href="@{/myList/{id}(id=${book.id})}">Add To MyBook</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </article>
+                </article>
             </div>
         </div>
     </div>
